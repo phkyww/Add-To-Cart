@@ -13,7 +13,7 @@ function renderProducts() {
                   <p>
                     Price - <span class="text-primary fs-5 fw-bold">$ ${product.price}</span>
                   </p>
-                  <div class="btn btn-primary w-100 cart-btn fs-6 fw-bold">
+                  <div class="btn btn-primary w-100 cart-btn fs-6 fw-bold" onclick="addToCarts(${product.id})">
                     Add to Cart
                   </div>
                 </div>
@@ -22,3 +22,20 @@ function renderProducts() {
   });
 }
 renderProducts();
+
+//Carts Array
+let carts = [];
+
+//Add to Carts Array
+function addToCarts(id) {
+  if (carts.some((cart) => cart.id === id)) {
+    alert("Added into carts");
+  } else {
+    let cart = products.find((product) => product.id === id);
+    carts.push({
+      //extract the cart and assign
+      ...cart,
+      quantity: 1,
+    });
+  }
+}
