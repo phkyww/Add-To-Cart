@@ -27,7 +27,7 @@ renderProducts();
 //Carts Array
 let carts = [];
 
-//Add to Carts Array
+//Add Carts
 function addToCarts(id) {
   if (carts.some((cart) => cart.id === id)) {
     changeQuantity("plus", id);
@@ -40,9 +40,10 @@ function addToCarts(id) {
     });
   }
   renderCarts();
+  renderNumPrice();
 }
 
-//Render product Carts
+//Render Carts
 function renderCarts() {
   cartsDiv.innerHTML = "";
   carts.forEach((cart) => {
@@ -92,4 +93,18 @@ function changeQuantity(condition, id) {
     };
   });
   renderCarts();
+  renderNumPrice();
+}
+
+//Cart number and total price
+function renderNumPrice() {
+  let totalPrice = 0,
+    totalCarts = 0;
+  carts.forEach((cart) => {
+    totalPrice += cart.price * cart.quantity;
+    totalCarts += cart.quantity;
+  });
+
+  document.querySelector("#totalPrice").innerText = `$ ${totalPrice}`;
+  document.querySelector("#totalCarts").innerText = `${totalCarts}`;
 }
