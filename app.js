@@ -1,4 +1,5 @@
 let productDiv = document.querySelector("#product-div");
+let cartsDiv = document.querySelector(".carts-table");
 
 //Render Products
 function renderProducts() {
@@ -33,9 +34,43 @@ function addToCarts(id) {
   } else {
     let cart = products.find((product) => product.id === id);
     carts.push({
-      //extract the cart and assign
+      //extract the cart and add
       ...cart,
       quantity: 1,
     });
   }
+  renderCarts();
+}
+
+//Render product Carts
+function renderCarts() {
+  cartsDiv.innerHTML = "";
+  carts.forEach((cart) => {
+    cartsDiv.innerHTML += `
+                <tr>
+                  <td>
+                    <img
+                      src="${cart.src}"
+                      id="img-cart"
+                      title="${cart.name}"
+                    />
+                  </td>
+                  <td><p class="fs-5 pt-2">$ ${cart.price}</p></td>
+                  <td>
+                    <i
+                      class="fa-solid fa-circle-minus fs-5 text-primary pt-3"
+                    ></i>
+                    <span class="mx-2 fs-5 pt-3">${cart.quantity}</span>
+                    <i
+                      class="fa-solid fa-circle-plus fs-5 text-primary pt-3"
+                    ></i>
+                  </td>
+                  <td>
+                    <i
+                      class="fa-solid fa-trash text-danger fs-5 pt-3"
+                      title="Remove"
+                    ></i>
+                  </td>
+                </tr>`;
+  });
 }
