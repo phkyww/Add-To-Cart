@@ -30,7 +30,7 @@ let carts = [];
 //Add to Carts Array
 function addToCarts(id) {
   if (carts.some((cart) => cart.id === id)) {
-    alert("Added into carts");
+    changeQuantity("plus", id);
   } else {
     let cart = products.find((product) => product.id === id);
     carts.push({
@@ -58,11 +58,11 @@ function renderCarts() {
                   <td><p class="fs-5 pt-2">$ ${cart.price}</p></td>
                   <td>
                     <i
-                      class="fa-solid fa-circle-minus fs-5 text-primary pt-3"
+                      class="fa-solid fa-circle-minus fs-5 text-primary pt-3" onclick="changeQuantity('minus',${cart.id})"
                     ></i>
                     <span class="mx-2 fs-5 pt-3">${cart.quantity}</span>
                     <i
-                      class="fa-solid fa-circle-plus fs-5 text-primary pt-3"
+                      class="fa-solid fa-circle-plus fs-5 text-primary pt-3" onclick="changeQuantity('plus',${cart.id})"
                     ></i>
                   </td>
                   <td>
@@ -73,4 +73,23 @@ function renderCarts() {
                   </td>
                 </tr>`;
   });
+}
+
+//Quantity function
+function changeQuantity(condition, id) {
+  carts = carts.map((cart) => {
+    let quantity = cart.quantity;
+    if (cart.id === id) {
+      if (condition == "minus" && quantity > 1) {
+        quantity--;
+      } else if (condition == "plus" && quantity < 100) {
+        quantity++;
+      }
+    }
+    return {
+      ...cart,
+      quantity,
+    };
+  });
+  renderCarts();
 }
