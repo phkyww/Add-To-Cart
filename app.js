@@ -123,7 +123,8 @@ function deleteCart(id) {
 function defaultTxt() {
   if (!cartsDiv.innerHTML) {
     showDiv.innerHTML = `
-              <h5 class="my-3 text-center text-danger">No items in cart.</h5>
+              <h5 class="my-3 text-center text-danger">
+              <i class="fa-solid fa-triangle-exclamation mx-3"></i>No items in cart.</h5>
               <hr />`;
   }
 }
