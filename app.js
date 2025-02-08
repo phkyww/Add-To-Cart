@@ -1,5 +1,6 @@
 let productDiv = document.querySelector("#product-div");
 let cartsDiv = document.querySelector(".carts-table");
+let showDiv = document.querySelector(".show");
 
 //Render Products
 function renderProducts() {
@@ -45,6 +46,7 @@ function addToCarts(id) {
 
 //Render Carts
 function renderCarts() {
+  showDiv.innerHTML = "";
   cartsDiv.innerHTML = "";
   carts.forEach((cart) => {
     cartsDiv.innerHTML += `
@@ -74,6 +76,7 @@ function renderCarts() {
                   </td>
                 </tr>`;
   });
+  defaultTxt();
 }
 
 //Quantity function
@@ -114,4 +117,13 @@ function deleteCart(id) {
   carts = carts.filter((cart) => cart.id != id);
   renderCarts();
   renderNumPrice();
+}
+
+//default text when no carts
+function defaultTxt() {
+  if (!cartsDiv.innerHTML) {
+    showDiv.innerHTML = `
+              <h5 class="my-3 text-center text-danger">No items in cart.</h5>
+              <hr />`;
+  }
 }
