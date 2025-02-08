@@ -68,7 +68,7 @@ function renderCarts() {
                   </td>
                   <td>
                     <i
-                      class="fa-solid fa-trash text-danger fs-5 pt-3"
+                      class="fa-solid fa-trash text-danger fs-5 pt-3" onclick="deleteCart(${cart.id})"
                       title="Remove"
                     ></i>
                   </td>
@@ -107,4 +107,11 @@ function renderNumPrice() {
 
   document.querySelector("#totalPrice").innerText = `$ ${totalPrice}`;
   document.querySelector("#totalCarts").innerText = `${totalCarts}`;
+}
+
+//delete Cart
+function deleteCart(id) {
+  carts = carts.filter((cart) => cart.id != id);
+  renderCarts();
+  renderNumPrice();
 }
